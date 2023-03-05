@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "//magicmedportal.github.io/patient/static/css/main.073c9b0a.css",
-    "main.js": "//magicmedportal.github.io/patient/static/js/main.e7470010.js",
-    "static/js/787.ddad04e8.chunk.js": "//magicmedportal.github.io/patient/static/js/787.ddad04e8.chunk.js",
-    "static/media/logo.svg": "//magicmedportal.github.io/patient/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "//magicmedportal.github.io/patient/index.html",
-    "main.073c9b0a.css.map": "//magicmedportal.github.io/patient/static/css/main.073c9b0a.css.map",
-    "main.e7470010.js.map": "//magicmedportal.github.io/patient/static/js/main.e7470010.js.map",
-    "787.ddad04e8.chunk.js.map": "//magicmedportal.github.io/patient/static/js/787.ddad04e8.chunk.js.map"
+    "main.css": "/patient/static/css/main.073c9b0a.css",
+    "main.js": "/patient/static/js/main.1255b853.js",
+    "static/js/787.ddad04e8.chunk.js": "/patient/static/js/787.ddad04e8.chunk.js",
+    "static/media/logo.svg": "/patient/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/patient/index.html",
+    "main.073c9b0a.css.map": "/patient/static/css/main.073c9b0a.css.map",
+    "main.1255b853.js.map": "/patient/static/js/main.1255b853.js.map",
+    "787.ddad04e8.chunk.js.map": "/patient/static/js/787.ddad04e8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.e7470010.js"
+    "static/js/main.1255b853.js"
   ]
 }
