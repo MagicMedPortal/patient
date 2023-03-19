@@ -1,0 +1,15 @@
+body{
+    background: #CADEF3;
+}
+
+canvas {
+    display: none; 
+}
+
+#container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; 
+
+}
