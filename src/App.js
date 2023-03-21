@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import Welcome from './Welcome';
+import PatientInfo from './PatientInfo';
+import Image from './Image';
 import './style.css'; 
 
 
@@ -22,14 +24,11 @@ const steps = [
   {
     label: 'Get Patient Information',
     description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
+      <PatientInfo />,
   },
   {
     label: 'Confirm Patient Data',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
+    description: <Image/>,
   },
   {
     label: 'Get Basic Vitals',

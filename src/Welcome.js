@@ -1,16 +1,17 @@
+import * as React from 'react'; 
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import './style.css'; 
-import Button from '@mui/material/Button';
-import { Container} from '@mui/material';
+
+
+
+
+
 
 
 export default function Welcome() { 
 
-
     return(
-         
 
            <Card sx={{ maxWidth: 800, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
@@ -27,10 +28,11 @@ export default function Welcome() {
                       <li>Extreme headaches</li>
                       <li>Slurred Speech</li>
                     </ol>
+
+                    <b><i>By clicking Continue, you are confirming that you do not have a life threatening emergency.</i></b>
                   </Typography>
                   <p></p>
 
-                  <span style={{margin: 10}}><center><Button variant="contained" size="large">I am not experiencing any of those symptoms</Button></center></span>
 
                 </CardContent>
               </Card>

@@ -3,13 +3,19 @@ import { createWorker } from "tesseract.js";
 import { useState, useEffect, useRef } from "react";
 import p5 from "p5";
 import './style.css'; 
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { getImageSnap } from "./PatientInfo";
+
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
 
-export default function Image(capture,...props) {
+export default function Image() {
 
-let image = capture; 
+let image = getImageSnap; 
+console.log(getImageSnap); 
 let img; 
 let video; 
 
@@ -36,8 +42,6 @@ let video;
   p5.setup = () => {
     p5.clear()
     p5.createCanvas(800, 700).id("canvas");
-    video = createCapture(VIDEO); //access live webcam
-    video.size(800, 240); //change the size to 320 x 240
     img.filter(p5.THRESHOLD, .55)
     p5.image(img, 0, 0)
     const canvas = document.getElementById("canvas");
@@ -94,7 +98,22 @@ let video;
             p5Instance.remove();
         }
     }, []); 
-  return(<div><img src={displayImage}/><br/>
-  <h1>{text}</h1><br/></div>)
+  return(
+
+    <Card sx={{ maxWidth: 800, display: "flex" }}>
+                <CardContent style={{padding: 10, margin: 10, flex: 1}}>
+                  <Typography variant="h4" color="text.primary" gutterBottom>
+                    Please provide a picture of your driver's license.
+                  </Typography>
+            
+
+                  <img src={image}/>
+
+
+                </CardContent>
+              </Card>
+
+
+  )
 
 };
