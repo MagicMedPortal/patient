@@ -3,16 +3,15 @@ import { createWorker } from "tesseract.js";
 import { useState, useEffect, useRef } from "react";
 import p5 from "p5";
 import './style.css'; 
-import { display } from "@mui/system";
-import BlueCross from '../src/bcbstx.png';
-import License from '../src/license.jpeg';
+
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
 
-export default function Image(image, ...props) {
+export default function Image(capture,...props) {
 
-  const image = props; 
-  let img; 
-
+let image = capture; 
+let img; 
+let video; 
 
   const [text, setText] = useState("");
   const [displayImage, setDisplay] = useState("")
@@ -36,8 +35,9 @@ export default function Image(image, ...props) {
 
   p5.setup = () => {
     p5.clear()
-    p5.noCanvas(); 
-    p5.createCanvas(img.width, img.height).id("canvas");
+    p5.createCanvas(800, 700).id("canvas");
+    video = createCapture(VIDEO); //access live webcam
+    video.size(800, 240); //change the size to 320 x 240
     img.filter(p5.THRESHOLD, .55)
     p5.image(img, 0, 0)
     const canvas = document.getElementById("canvas");

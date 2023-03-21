@@ -3,8 +3,9 @@ body{
 }
 
 canvas {
-    display: none; 
+    display: flex; 
 }
+
 
 #container { 
     display: flex;
