@@ -39,7 +39,6 @@ export default function PatientInfo() {
         p5.image(video, 0, 0); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
         const canvas = document.getElementById("canvas");
         imageSnap = canvas.toDataURL();
-        getImageSnap(); 
         }
 
 
@@ -57,7 +56,10 @@ export default function PatientInfo() {
             p5Instance.remove();
         }
     }, []); 
+
+
   return(
+
 
     <Card sx={{ maxWidth: 800, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
@@ -74,6 +76,7 @@ export default function PatientInfo() {
 
 
   )
+    
 
 
 }
