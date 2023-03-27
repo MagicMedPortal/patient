@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getImageSnap } from "./PatientInfo";
-import { getCanvas } from "./PatientInfo";
+import Upscaler from 'upscaler'; 
 
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
@@ -15,8 +15,8 @@ import { getCanvas } from "./PatientInfo";
 export default function Image() {
 
 let image = getImageSnap(); 
+const upscaler = new Upscaler()
 
-console.log(image);
 
 let canvasImage = getCanvas(); 
 
