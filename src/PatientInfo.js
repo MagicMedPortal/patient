@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {  useEffect, useRef } from "react";
+import Upscaler from 'upscaler'; 
 
 
 
@@ -16,9 +17,15 @@ let button;
 let imageSnap; 
 
 export function getImageSnap() {
+    const upscaler = new Upscaler(); 
+    let upscaled = upscaler.upscale(imageSnap, {
+      patchSize: 20,
+      padding: 2,
+    })
     console.log("successfully passing image"); 
-    return(imageSnap); 
+    return(upscaled); 
 }
+
 
 export default function PatientInfo() {
 
@@ -26,8 +33,8 @@ export default function PatientInfo() {
 
         p5.setup = () => {
 
-        video = p5.createCapture(p5.VIDEO); //access live webcam
-        video.size(400, 300); //change the size to 320 x 240
+        video = p5.createCapture(p5.VIDEO); 
+        video.size(648, 408);
        
         button = p5.createButton('Take Photo').id("button"); //create a button called "snap"
         button.mousePressed(takesnap); //when the button is pressed, call the function called "takesnap"
@@ -37,8 +44,8 @@ export default function PatientInfo() {
 
         function takesnap() {
 
-        p5.createCanvas(400, 300).id("canvasId");
-        p5.image(video, 0, 0, 400, 300); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
+        p5.createCanvas(648, 408).id("canvasId");
+        p5.image(video, 0, 0, 648, 408); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
         const canvas = document.getElementById("canvasId");
         imageSnap = canvas.toDataURL();
         getImageSnap(); 

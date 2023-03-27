@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getImageSnap } from "./PatientInfo";
+import { getCanvas } from "./PatientInfo";
 
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
@@ -15,10 +16,13 @@ export default function Image() {
 
 let image = getImageSnap(); 
 
+console.log(image);
+
+let canvasImage = getCanvas(); 
+
 let img; 
 
   const [text, setText] = useState("");
-  const [displayImage, setDisplay] = useState("")
 
   function sketch (p5) {
 
@@ -38,12 +42,11 @@ let img;
   }; 
 
   p5.setup = () => {
-    p5.noCanvas()
-    img.filter(p5.THRESHOLD, .55)
+    p5.createCanvas(img.width, img.height).id("canvas");
+    img.filter(p5.GRAY, .55)
     p5.image(img, 0, 0)
     const canvas = document.getElementById("canvas");
-    const dataURL = canvas.toDataURL();
-    setDisplay(dataURL);  
+
     
     const rectangles = [
       {
@@ -103,7 +106,7 @@ let img;
 Please Confirm Your Information Below: 
                   </Typography>
 
-                  {text}
+                  <div style={{width: "500px"}}>{text}</div>
 
 
                 </CardContent>
