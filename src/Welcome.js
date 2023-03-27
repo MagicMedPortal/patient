@@ -13,7 +13,7 @@ export default function Welcome() {
 
     return(
 
-           <Card sx={{ maxWidth: 800, display: "flex" }}>
+           <Card sx={{ maxWidth: 750, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
                   <Typography variant="h4" color="text.primary" gutterBottom>
                     <center><b>Welcome!</b></center>

@@ -3,11 +3,12 @@ import p5 from "p5";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { useState, useEffect, useRef } from "react";
+import {  useEffect, useRef } from "react";
 
 
 
 // source for taking picture https://editor.p5js.org/son/sketches/LuJ2eGf9p
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
 
 let video;
@@ -25,20 +26,23 @@ export default function PatientInfo() {
 
         p5.setup = () => {
 
-        p5.createCanvas(533.33, 400).id("canvas");
-        p5.background(51);
         video = p5.createCapture(p5.VIDEO); //access live webcam
-        video.size(533.33, 400); //change the size to 320 x 240
-        button = p5.createButton('snap'); //create a button called "snap"
+        video.size(400, 300); //change the size to 320 x 240
+       
+        button = p5.createButton('Take Photo').id("button"); //create a button called "snap"
         button.mousePressed(takesnap); //when the button is pressed, call the function called "takesnap"
 
         
         }
 
         function takesnap() {
-        p5.image(video, 0, 0); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
-        const canvas = document.getElementById("canvas");
+
+        p5.createCanvas(400, 300).id("canvasId");
+        p5.image(video, 0, 0, 400, 300); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
+        const canvas = document.getElementById("canvasId");
         imageSnap = canvas.toDataURL();
+        getImageSnap(); 
+
         }
 
 
@@ -61,14 +65,16 @@ export default function PatientInfo() {
   return(
 
 
-    <Card sx={{ maxWidth: 800, display: "flex" }}>
+    <Card sx={{ maxWidth: 750, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
-                  <Typography variant="h4" color="text.primary" gutterBottom>
-                    Please provide a picture of your driver's license.
-                  </Typography>
-            
+                  <Typography variant="h6" color="text.primary" gutterBottom>
+                    Please provide a picture of your insurance card. Please fill the screen with your insurance card to capture all the necessary information. </Typography>
 
-                          <div className="App" ref={p5ContainerRef} />
+                     <Typography variant="body1" color="text.secondary" gutterBottom>
+
+                     If you do not have insurance, please skip this step. You will have to manually fill out your information in the next screen.
+                  </Typography>
+                    <div  ref={p5ContainerRef} />
 
 
                 </CardContent>

@@ -1,4 +1,3 @@
-import Tesseract from "tesseract.js";
 import { createWorker } from "tesseract.js";
 import { useState, useEffect, useRef } from "react";
 import p5 from "p5";
@@ -14,10 +13,9 @@ import { getImageSnap } from "./PatientInfo";
 
 export default function Image() {
 
-let image = getImageSnap; 
-console.log(getImageSnap); 
+let image = getImageSnap(); 
+
 let img; 
-let video; 
 
   const [text, setText] = useState("");
   const [displayImage, setDisplay] = useState("")
@@ -40,8 +38,7 @@ let video;
   }; 
 
   p5.setup = () => {
-    p5.clear()
-    p5.createCanvas(800, 700).id("canvas");
+    p5.noCanvas()
     img.filter(p5.THRESHOLD, .55)
     p5.image(img, 0, 0)
     const canvas = document.getElementById("canvas");
@@ -100,14 +97,13 @@ let video;
     }, []); 
   return(
 
-    <Card sx={{ maxWidth: 800, display: "flex" }}>
+    <Card sx={{ maxWidth: 750, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
                   <Typography variant="h4" color="text.primary" gutterBottom>
-                    Please provide a picture of your driver's license.
+Please Confirm Your Information Below: 
                   </Typography>
-            
 
-                  <img src={image}/>
+                  {text}
 
 
                 </CardContent>

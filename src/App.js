@@ -12,9 +12,12 @@ import Welcome from './Welcome';
 import PatientInfo from './PatientInfo';
 import Image from './Image';
 import './style.css'; 
+import PatientIntake from './PatientIntake';
+import Vitals from './Vitals';
 
 
 // layout credits to MUI base example: https://mui.com/material-ui/react-stepper/
+
 
 const steps = [
   {
@@ -22,21 +25,23 @@ const steps = [
     description: <Welcome/> 
   },
   {
-    label: 'Get Patient Information',
+    label: 'What Brings You In',
     description:
-      <PatientInfo />,
+      <PatientIntake />,
   },
   {
-    label: 'Confirm Patient Data',
+    label: 'Basic Vitals',
+    description: <Vitals/>,
+  },
+  {
+    label: 'Get Insurance Information',
+    description: <PatientInfo/>,
+  },
+
+    {
+    label: 'Confirm Checkin',
     description: <Image/>,
-  },
-  {
-    label: 'Get Basic Vitals',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
+  }
 ];
 
 export default function VerticalLinearStepper() {
@@ -52,6 +57,8 @@ export default function VerticalLinearStepper() {
 
   const handleReset = () => {
     setActiveStep(0);
+    window.location.reload(false);
+
   };
 
   return (
@@ -63,7 +70,7 @@ export default function VerticalLinearStepper() {
           <Step key={step.label}>
             <StepLabel
               optional={
-                index === 3 ? (
+                index === 4 ? (
                   <Typography variant="caption">Last step</Typography>
                 ) : null
               }
@@ -96,9 +103,9 @@ export default function VerticalLinearStepper() {
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
+          <Typography>All steps completed - you&apos;re finished! Someone will be with you shortly.</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
+            Complete Check In
           </Button>
         </Paper>
       )}

@@ -1,16 +1,17 @@
 body{
-    background: #CADEF3;
+    background: #7bd1ff6e;
 }
 
 canvas {
+    display: hidden; 
+}
+
+#canvasId {
     display: flex; 
 }
 
 
-#container { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto; 
+
+#button {
 
 }
