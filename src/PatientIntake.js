@@ -6,6 +6,11 @@ import { useState } from "react";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
@@ -51,7 +56,7 @@ export default function PatientIntake() {
       </ToggleButton>
     </ToggleButtonGroup>
 
-    {formats} 
+
 
     </CardContent>
     </Card>
