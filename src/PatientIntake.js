@@ -1,5 +1,4 @@
 import * as React from 'react'; 
-import p5 from "p5";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -17,94 +16,18 @@ import { FormControlLabel } from '@mui/material';
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
-let painValue; 
-let otherSymptom; 
-let patientNotes; 
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 
 
 export default function PatientIntake() {
 
+
   const [body, setBody] = useState([]);
-  const [bodyValue, setBodyValue] = useState([]); 
-  const [symptom, setSymptomValue] = useState([]); 
-
-  const handleChangeBody = (event) => {
-    const {
-      target: { bodyValue },
-    } = event;
-    setBody(
-      // On autofill we get a stringified value.
-      typeof bodyValue === 'string' ? bodyValue.split(',') : bodyValue,
-    )
-
-    console.log(bodyValue)
-
-    
-  };
+  const [patientNotes, setPatientNotes] = useState("")
+  const [painValue, setPainValue] = useState(0)
 
 
-
-  return(
-
-
-    <Card sx={{ maxWidth: 750, display: "flex" }}>
-                <CardContent style={{padding: 10, margin: 10, flex: 1}}>
-                  <Typography variant="h4" color="text.primary" gutterBottom>
-                    What brings you in today? 
-                  </Typography>
-
-                <p></p>
-
-                <Typography variant="h6" color="text.secondary" gutterBottom>
-                  Enter as many places where you feel any symptoms. </Typography>
-
-                  <p></p>
-
-                 
-                <FormControl sx={{ m: 1, width: 300 }}>
-                  <InputLabel id="bodyLocation">Location of Symptoms on the Body</InputLabel>
-                  <Select
-                    labelId="bodyLocation"
-                    id="bodyLocation"
-                    multiple
-                    value={bodyValue}
-                    onChange={handleChangeBody}
-                    input={<OutlinedInput label="Location of Symptoms" />}
-                    renderValue={(selected) => selected.join(', ')}
-                    MenuProps={MenuProps}
-                  >
-                    {bodyLocations.map((bodyLocations) => (
-                      <MenuItem key={bodyLocations.location} value={bodyLocations.location}>
-                          <FormControlLabel control={<Checkbox />} label={bodyLocations.location} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-
-
-                </CardContent>
-              </Card>
-
-
-  )
-    
-
-
-}
-
-const bodyLocations = [
+  const bodyLocations = [
     {part: "Whole Body", location: "Whole Body", value: "3"},
     {part: "Upper Body", location: "Head", value: "5"}, 
     {part: "Upper Body", location: "Neck", value: "5"}, 
@@ -134,3 +57,67 @@ const symptomsCount = [
     {type: "Body", symptom: "Pain", value: painValue}, 
     {type: "Infection", symptom: "Burning Sensation", value: "5"}
 ]
+
+
+  const handleChangeBody = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setBody(
+      typeof value === 'string' ? value.split(',') : value,
+  
+    );
+
+    
+  };
+
+
+
+  return(
+
+
+    <Card sx={{ maxWidth: 750, display: "flex" }}>
+                <CardContent style={{padding: 10, margin: 10, flex: 1}}>
+                  <Typography variant="h6" color="text.primary" gutterBottom>
+                    What brings you in today? 
+                  </Typography>
+
+                <p></p>
+
+                <Typography variant="body1" color="text.secondary" gutterBottom>
+                  Enter as many places where you feel any symptoms. Tap as many areas are you need to. </Typography>
+
+                  <p></p>
+
+                 
+                  <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Location of Symptoms</InputLabel>
+                        <Select
+                              labelId="demo-multiple-name-label"
+                              id="demo-multiple-name"
+                              multiple
+                              value={body}
+                              onChange={handleChangeBody}
+                              input={<OutlinedInput label="Location of Symptoms" />}
+                            >
+                       {bodyLocations.map((place) => (
+                              <MenuItem
+                                key={place.location}
+                                value={place.location}
+                              >
+                                {place.location}
+                              </MenuItem>
+                            ))}
+                      </Select>
+                      </FormControl>
+
+                </CardContent>
+              </Card>
+
+
+  )
+    
+
+
+}
+
