@@ -16,10 +16,6 @@ export default function Image() {
 
 let image = getImageSnap(); 
 const upscaler = new Upscaler()
-
-
-let canvasImage = getCanvas(); 
-
 let img; 
 
   const [text, setText] = useState("");

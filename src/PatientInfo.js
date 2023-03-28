@@ -10,6 +10,7 @@ import Upscaler from 'upscaler';
 
 // source for taking picture https://editor.p5js.org/son/sketches/LuJ2eGf9p
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
+// example for upscaler: 
 
 
 let video;
@@ -19,8 +20,8 @@ let imageSnap;
 export function getImageSnap() {
     const upscaler = new Upscaler(); 
     let upscaled = upscaler.upscale(imageSnap, {
-      patchSize: 20,
-      padding: 2,
+      patchSize: 32,
+      padding: 5,
     })
     console.log("successfully passing image"); 
     return(upscaled); 
