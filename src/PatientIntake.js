@@ -2,68 +2,224 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { useState } from "react";
+import { useState} from "react";
+
+
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import Rating from '@mui/material/Rating';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { Button, TextField } from '@mui/material';
 
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+let dataSet; 
+const StyledRating = styled(Rating)(({ theme }) => ({
+  '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
+    color: theme.palette.action.disabled,
+  },
+}));
 
 
 
-// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
+
+const customIcons = {
+  1: {
+    icon: <SentimentVeryDissatisfiedIcon color="error" />,
+    label: 'Extremely Ill',
+  },
+  2: {
+    icon: <SentimentDissatisfiedIcon color="error" />,
+    label: 'Terrible',
+  },
+  3: {
+    icon: <SentimentSatisfiedIcon color="warning" />,
+    label: 'Some sickness',
+  },
+  4: {
+    icon: <SentimentSatisfiedAltIcon color="success" />,
+    label: 'Minor',
+  },
+  5: {
+    icon: <SentimentVerySatisfiedIcon color="success" />,
+    label: 'Fine/Just here for followup',
+  },
+};
+
+const painIcons = {
+  1: {
+    icon: <SentimentVeryDissatisfiedIcon color="error" />,
+    label: 'In Extreme Pain',
+  },
+  2: {
+    icon: <SentimentDissatisfiedIcon color="error" />,
+    label: 'Severe Amount of Pain',
+  },
+  3: {
+    icon: <SentimentSatisfiedIcon color="warning" />,
+    label: 'Moderate Amount of Pain',
+  },
+  4: {
+    icon: <SentimentSatisfiedAltIcon color="success" />,
+    label: 'Mild Pain',
+  },
+  5: {
+    icon: <SentimentVerySatisfiedIcon color="success" />,
+    label: 'No Pain',
+  },
+};
 
 
+function IconContainer(props) {
+  const { value, ...other } = props;
+  return <span {...other}>{customIcons[value].icon}</span>;
+}
+
+IconContainer.propTypes = {
+  value: PropTypes.number.isRequired,
+};
+
+
+export function getBodyDataSet() {
+  return (dataSet)
+}
 
 
 export default function PatientIntake() {
 
+  const [painValue, setPainValue] = useState(0); 
+  const [feelValue, setFeelValue] = useState(0); 
+  const [body, setBody] = useState(['']); 
+  const [notes, setNotes] = useState(""); 
+
+  const handleFeel=(event, newFeel) => {
+    setFeelValue(newFeel); 
+  }
+
+    const handlePainValue=(event, newPain) => {
+    setPainValue(newPain); 
+  }
+
+  const handleBody = (event, newBody) => {
+    setBody(newBody)
+  }
+
+  const handleNotes = (event, newNotes) => {
+    setNotes(newNotes); 
+  }
 
 
+  return(
 
-  const [formats, setFormats] = React.useState(() => ['']);
 
-  const handleFormat = (event, newFormats) => {
-    setFormats(newFormats);
-  };
-
-  return (
     <Card sx={{ maxWidth: 750, display: "flex" }}>
-    <CardContent style={{padding: 10, margin: 10, flex: 1}}>
-    <ToggleButtonGroup
-      value={formats}
-      onChange={handleFormat}
-      aria-label="text formatting"
-      orientation='vertical'
-      fullWidth
-    >
-      <ToggleButton value="whole-body" aria-label="whole-body">
-        Whole Body
-      </ToggleButton>
-      <ToggleButton value="head" aria-label="head">
-       Head/Face/Ears/Nose/Neck
-      </ToggleButton>
-      <ToggleButton value="chest" aria-label="chest">
-        Chest, Shoulders, Arms, Hands
-      </ToggleButton>
-      <ToggleButton value="midsection" aria-label="midsection">
-        Stomach, Stomach-Area, Bowels
-      </ToggleButton>
-      <ToggleButton value="lower-body" aria-label="lower-body">
-        Hips, Sexual Organs, Back, Thighs, Legs, Feet
-      </ToggleButton>
-    </ToggleButtonGroup>
+      <CardContent style={{padding: 10, margin: 10, flex: 1}}>
+        <Typography variant="body1" color="text.primary" gutterBottom>
+          What brings you in today?  Please be as descriptive as possible. 
+        </Typography>
+
+        <p><Typography variant="button" color="text.info">How do you feel?</Typography></p>
+
+            <StyledRating
+                    name="how-feel"
+                    defaultValue={2}
+                    value={feelValue}
+                    onChange={handleFeel}
+                    IconContainerComponent={IconContainer}
+                    getLabelText={(value) => customIcons[value].label}
+                    highlightSelectedOnly
+                    size='large'
+                  />
+
+          <br></br>
+
+                  <Typography variant="overline">{customIcons[feelValue] == null ? "" : customIcons[feelValue].label}</Typography>
 
 
+                  <p><Typography variant="button">How much pain are you in?</Typography></p>
 
-    </CardContent>
+
+                  <StyledRating
+                    name="paint"
+                    defaultValue={1}
+                    value={painValue}
+                    onChange={handlePainValue}
+                    IconContainerComponent={IconContainer}
+                    getLabelText={(value) => painIcons[value].label}
+                    highlightSelectedOnly
+                    size='large'
+                    >
+
+                    </StyledRating> 
+                    <br></br>
+                    <Typography variant="overline">{painIcons[painValue] == null ? "" : painIcons[painValue].label}</Typography>
+
+                    <p><Typography variant="button">What are some symptoms</Typography></p>
+
+
+            <ToggleButtonGroup
+                          value={body}
+              onChange={handleBody}
+              aria-label="text formatting"
+              orientation='vertical'
+              fullWidth
+            >
+              <ToggleButton value="whole-body-chills" aria-label="whole-body">
+                Whole Body Chills
+              </ToggleButton>
+              <ToggleButton value="broken-limb" aria-label="sprain">
+                Broken Limb
+              </ToggleButton>
+              <ToggleButton value="cough" aria-label="cough">
+                Cough
+              </ToggleButton>
+              <ToggleButton value="headaches" aria-label="headaches">
+                Headaches
+              </ToggleButton>
+              <ToggleButton value="lower-body" aria-label="lower-body">
+                Midsection Pain
+              </ToggleButton>
+            </ToggleButtonGroup>
+            <p></p>
+
+                                <p><Typography variant="button">Anything else?</Typography></p>
+
+
+            <TextField 
+              variant='outlined' 
+              multiline 
+              fullWidth
+              value={notes}
+              onChange={handleNotes}
+              rows={4}
+              label="Anything else you'd like us to know?"
+              helperText="Optional"/>
+
+              <p></p>
+
+            <Button variant="contained" onClick={() => {
+    dataSet = {feel: feelValue, pain: painValue, symptoms: body, patientNotes: notes}
+    getBodyDataSet(); 
+    console.log(getBodyDataSet()); 
+  }}>Submit</Button>
+
+      
+                    
+
+
+      </CardContent>
     </Card>
 
-  );
-  
+
+  )
     
 
+
 }
+
 

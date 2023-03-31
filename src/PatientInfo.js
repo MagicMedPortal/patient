@@ -4,7 +4,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {  useEffect, useRef } from "react";
-import Upscaler from 'upscaler'; 
 
 
 
@@ -18,13 +17,7 @@ let button;
 let imageSnap; 
 
 export function getImageSnap() {
-    const upscaler = new Upscaler(); 
-    let upscaled = upscaler.upscale(imageSnap, {
-      patchSize: 32,
-      padding: 5,
-    })
-    console.log("successfully passing image"); 
-    return(upscaled); 
+    return(imageSnap); 
 }
 
 
@@ -73,7 +66,7 @@ export default function PatientInfo() {
   return(
 
 
-    <Card sx={{ maxWidth: 750, display: "flex" }}>
+    <Card sx={{ maxWidth: 800, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
                   <Typography variant="h6" color="text.primary" gutterBottom>
                     Please provide a picture of your insurance card. Please fill the screen with your insurance card to capture all the necessary information. </Typography>
