@@ -7,16 +7,22 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getImageSnap } from "./PatientInfo";
 import { getBodyDataSet } from "./PatientIntake";
-import Upscaler from 'upscaler'; 
-
+import './style.css'; 
+import License from './license.jpeg'
+import Insurance from './bcbstx.png'
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
+let firstName; 
 
 export default function Image() {
 
+//let image = getImageSnap(); 
+
 let image = getImageSnap(); 
-const upscaler = new Upscaler()
+
+
+
 let img; 
 
   const [text, setText] = useState("");
@@ -39,11 +45,12 @@ let img;
   }; 
 
   p5.setup = () => {
-    p5.createCanvas(img.width, img.height).id("canvas");
-    img.filter(p5.GRAY, .55)
+    p5.createCanvas(img.width, img.height).id("canvasId");
+       const canvas = document.getElementById("canvasId");
+    img.filter(p5.THRESHOLD, .55)
     p5.image(img, 0, 0)
-    const canvas = document.getElementById("canvas");
-
+ 
+// make quadrants
     
     const rectangles = [
       {
@@ -58,6 +65,9 @@ let img;
         width: canvas.width/2,
         height: canvas.height,
       },
+  
+
+
   ];
 
   (async () => {
@@ -66,6 +76,11 @@ let img;
       });  
       await worker.loadLanguage('eng');
       await worker.initialize('eng');
+      await worker.setParameters({
+        tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz/0123456789',
+        preserve_interword_spaces: '0'
+
+      })
       const values = [];
       console.log(rectangles.length)
 
@@ -97,13 +112,15 @@ let img;
     }, []); 
   return(
 
-    <Card sx={{ maxWidth: 750, display: "flex" }}>
+    <Card sx={{ minWidth: 750, display: "flex" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
                   <Typography variant="h4" color="text.primary" gutterBottom>
 Please Confirm Your Information Below: 
                   </Typography>
-
+                  <img src={image} /> 
                   <div style={{width: "500px"}}>{text}</div>
+
+                  
 
 
                 </CardContent>

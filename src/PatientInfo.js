@@ -27,20 +27,20 @@ export default function PatientInfo() {
 
         p5.setup = () => {
 
-        video = p5.createCapture(p5.VIDEO); 
-        video.size(648, 408);
-       
         button = p5.createButton('Take Photo').id("button"); //create a button called "snap"
         button.mousePressed(takesnap); //when the button is pressed, call the function called "takesnap"
 
+
+        video = p5.createCapture(p5.VIDEO); 
+        video.size(500,  375);
         
         }
 
         function takesnap() {
 
-        p5.createCanvas(648, 408).id("canvasId");
-        p5.image(video, 0, 0, 648, 408); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
-        const canvas = document.getElementById("canvasId");
+        p5.createCanvas(500, 375).id("canvas");
+        const canvas = document.getElementById("canvas");
+        p5.image(video, 0, 0, 500, 375); //draw the image being captured on webcam onto the canvas at the position (0, 0) of the canvas
         imageSnap = canvas.toDataURL();
         getImageSnap(); 
 
@@ -66,16 +66,12 @@ export default function PatientInfo() {
   return(
 
 
-    <Card sx={{ maxWidth: 800, display: "flex" }}>
+    <Card sx={{ minWidth: 600, display: "block" }}>
                 <CardContent style={{padding: 10, margin: 10, flex: 1}}>
-                  <Typography variant="h6" color="text.primary" gutterBottom>
-                    Please provide a picture of your insurance card. Please fill the screen with your insurance card to capture all the necessary information. </Typography>
-
-                     <Typography variant="body1" color="text.secondary" gutterBottom>
-
-                     If you do not have insurance, please skip this step. You will have to manually fill out your information in the next screen.
-                  </Typography>
-                    <div  ref={p5ContainerRef} />
+                  <Typography variant="body1" color="text.primary" gutterBottom>
+                    Please Provide Picture of Your Insurance Card. For sake of this demo, we are using insurance card because 
+                    it is easier for the OCR to parse versus the human cognition of driver's licenses. </Typography>
+                        <div  ref={p5ContainerRef}  />
 
 
                 </CardContent>
