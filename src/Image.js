@@ -47,7 +47,7 @@ let img;
   p5.setup = () => {
     p5.createCanvas(img.width, img.height).id("canvasId");
        const canvas = document.getElementById("canvasId");
-    img.filter(p5.THRESHOLD, .4)
+    img.filter(p5.THRESHOLD, .6)
     p5.image(img, 0, 0)
  
 // make quadrants
