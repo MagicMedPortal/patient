@@ -13,7 +13,7 @@ import Insurance from './bcbstx.png'
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
-let firstName; 
+let parse; 
 
 export default function Image() {
 
@@ -92,6 +92,8 @@ let img;
       setText(values); 
       await worker.terminate();
     })();
+
+    parse = replace(/\n/g, "<br>");
   
   
   }
@@ -118,7 +120,7 @@ let img;
 Please Confirm Your Information Below: 
                   </Typography>
                   <img src={image} /> 
-                  <div style={{width: "500px"}}>{text}</div>
+                  <div style={{width: "500px"}}>{parse}</div>
 
                   
 
