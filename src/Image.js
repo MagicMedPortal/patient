@@ -93,7 +93,7 @@ let img;
       await worker.terminate();
     })();
 
-    parse = replace(/\n/g, "<br>");
+    parse = text.replace(/\n/g, "<br>");
   
   
   }
