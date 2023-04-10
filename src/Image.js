@@ -6,20 +6,26 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getImageSnap } from "./PatientInfo";
-import { getBodyDataSet } from "./PatientIntake";
 import './style.css'; 
 import License from './license.jpeg'
 import Insurance from './bcbstx.png'
+import { Button } from "@mui/material";
+
+
+export function getPerson() { 
+  return ("")
+}
+
 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
-let parse; 
+let firstName; 
 
 export default function Image() {
 
 //let image = getImageSnap(); 
 
-let image = getImageSnap(); 
+let image = Insurance; 
 
 
 
@@ -47,7 +53,7 @@ let img;
   p5.setup = () => {
     p5.createCanvas(img.width, img.height).id("canvasId");
        const canvas = document.getElementById("canvasId");
-    img.filter(p5.GRAY)
+    //img.filter(p5.DILATE)
     p5.image(img, 0, 0)
  
 // make quadrants
@@ -92,13 +98,12 @@ let img;
       setText(values); 
       await worker.terminate();
     })();
-
-    parse = text.replace(/\n/g, "<br>");
   
   
   }
 
 }
+
 
     // create a reference to the container in which the p5 instance should place the canvas
     const p5ContainerRef = useRef();
@@ -112,6 +117,9 @@ let img;
             p5Instance.remove();
         }
     }, []); 
+
+
+  let parse = text.replace(/\n/g, '<br>')
   return(
 
     <Card sx={{ minWidth: 750, display: "flex" }}>
@@ -120,7 +128,10 @@ let img;
 Please Confirm Your Information Below: 
                   </Typography>
                   <img src={image} /> 
-                  <div style={{width: "500px"}}>{parse}</div>
+                                    <div style={{width: "500px"}}>{parse}</div>
+
+                  <Button variant="contained">Confirm</Button> &nbsp;&nbsp;&nbsp;&nbsp; <Button variant="outlined">Edit</Button>
+
 
                   
 
