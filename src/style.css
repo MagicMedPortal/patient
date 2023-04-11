@@ -5,7 +5,7 @@ body{
 
 
 #canvasId {
-    display: flex; 
+    display: none; 
 }
 
 .p5Canvas {
