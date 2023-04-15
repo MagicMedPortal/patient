@@ -11,6 +11,7 @@ import CardContent from '@mui/material/CardContent';
 
 export default function Welcome() { 
 
+
     return(
 
            <Card sx={{ maxWidth: 750, display: "flex" }}>
@@ -27,6 +28,7 @@ export default function Welcome() {
                       <li>Dizziness or nausea</li>
                       <li>Extreme headaches</li>
                       <li>Slurred Speech</li>
+
                     </ol>
 
                     <b><i>By clicking Continue, you are confirming that you do not have a life threatening emergency.</i></b>

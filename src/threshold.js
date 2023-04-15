@@ -6,6 +6,10 @@ let img;
 let dataURL; 
 let imagePath; 
 
+// this file is how you apply filters to make your use-case work. 
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js & https://github.com/Gherciu/react-p5
+// base file is still using P5 for image generation because we are passing canvases over. Also easier to see where to apply this code.  
+
 export function sketch (p5, imagePath) {
 
   p5.preload = () => {

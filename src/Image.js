@@ -17,6 +17,8 @@ import { getImageSnap } from "./PatientInfo";
 
 
 // progress code is from Material UI  https://mui.com/material-ui/react-progress/#LinearDeterminate.js 
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js & https://github.com/Gherciu/react-p5
+
 
 
 let dataText; 
@@ -51,7 +53,6 @@ LinearProgressWithLabel.propTypes = {
 
 
 
-// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
 
 
 
@@ -182,7 +183,7 @@ OCR Progress:                </Typography>
         <p></p>
             <Button variant="contained" onClick={() => {
               console.log(text) 
-              dataText = {"imageURL": dataURL, "output": text}
+              dataText = JSON.stringify({"imageURL": dataURL, "output": text})
               getPerson(); 
     console.log(getPerson()); 
   }}>Submit</Button>

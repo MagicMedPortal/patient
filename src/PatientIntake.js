@@ -95,7 +95,6 @@ export default function PatientIntake() {
   const [painValue, setPainValue] = useState(0); 
   const [feelValue, setFeelValue] = useState(0); 
   const [body, setBody] = useState(['']); 
-  const [notes, setNotes] = useState(""); 
 
   
 
@@ -111,9 +110,6 @@ export default function PatientIntake() {
     setBody(newBody)
   }
 
-  const handleNotes = (event, newNotes) => {
-    setNotes(newNotes); 
-  }
 
 
   return(
@@ -189,23 +185,8 @@ export default function PatientIntake() {
             </ToggleButtonGroup>
             <p></p>
 
-                                <p><Typography variant="button">Anything else?</Typography></p>
-
-
-            <TextField 
-              variant='outlined' 
-              multiline 
-              fullWidth
-              value={notes}
-              onChange={handleNotes}
-              rows={4}
-              label="Anything else you'd like us to know?"
-              helperText="Optional"/>
-
-              <p></p>
-
             <Button variant="contained" onClick={() => {
-    dataSet = {feel: feelValue, pain: painValue, symptoms: body, patientNotes: notes}
+    dataSet = JSON.stringify({'feel': feelValue, 'pain': painValue, 'symptoms': body})
     getBodyDataSet(); 
     console.log(getBodyDataSet()); 
   }}>Submit</Button>
