@@ -14,7 +14,13 @@ import LinearProgress from '@mui/material/LinearProgress';
 import TextField from '@mui/material/TextField';
 import * as dataURL from './dataURI.txt' ; 
 import { getImageSnap } from "./PatientInfo";
+import { OpenAIApi, Configuration } from "openai";
 
+
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 // progress code is from Material UI  https://mui.com/material-ui/react-progress/#LinearDeterminate.js 
 // source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js & https://github.com/Gherciu/react-p5
@@ -22,6 +28,9 @@ import { getImageSnap } from "./PatientInfo";
 
 
 let dataText; 
+const config = new Configuration({apiKey: process.env.REACT_APP_CHATKEY})
+const openai = new OpenAIApi(config)
+
 
 export function getPerson() {
 
@@ -56,16 +65,20 @@ LinearProgressWithLabel.propTypes = {
 
 
 
+
+
+
 export default function Image() {
 
-let image = getImageSnap(); 
+//let image = getImageSnap(); 
 
-
+let image = Insurance; 
 
   let img; 
 
   const [text, setText] = useState("");
   const [progress, setProgress] = useState(0)
+  const [parsed, setParsed] = useState(0); 
 
   function sketch (p5) {
 
@@ -128,16 +141,32 @@ let image = getImageSnap();
           const { data: { text } } = await worker.recognize(canvas, { rectangle: rectangles[i] });
           values.push(text.replace(/(\n+)/g, "\n").replace(/(1\n|,\n|  |,)/g, ""));
         }
-        console.log(values);
-        setText(values); 
+        setText(values[0].concat(values[1])); 
+        console.log(`this is what ${text} looks like`)
+        console.log(typeof text)
         await worker.terminate();
       })();
-    
-    
+
+      (async()=>{
+
+        console.log("Running Chat GPT")
+
+  
+      const {data : {choices} } = await openai.createCompletion({
+        model: 'text-davinci-002',
+        prompt: `can you please transform this string ${text} into a JSON object, removing all unncessary characters, and output the JSON`,
+        max_tokens: 300,
+        n: 1,
+        temperature: 0.5,
+      });
+
+      console.log(choices[0].text)
+      setParsed(choices[0].text)
+
+
+      })();
     }
-
-}
-
+  }
 
     // create a reference to the container in which the p5 instance should place the canvas
     const p5ContainerRef = useRef();
@@ -151,6 +180,7 @@ let image = getImageSnap();
             p5Instance.remove();
         }
     }, []); 
+
 
 
   return(
@@ -172,21 +202,43 @@ OCR Progress:                </Typography>
 
       <TextField
           id="ocr-output"
-          label="OCR Output"
-          defaultValue={text}
-          onChange={event=> setText(event.target.value)}
+          label="OCR + ChatGPT Parsed"
+          defaultValue={parsed}
+          onChange={event=> setParsed(event.target.value)}
           multiline
           fullWidth
-          helperText= "This is the pure OCR output that can be edited"
+          helperText= "This is after chatGPT has cleaned it up."
         />
+
+        <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="ocr output"
+        >
+          <Typography>Raw OCR Output</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography variant="body2" style={{whiteSpace: "pre-wrap"}}>
+            {text}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      
+
+        
 
         <p></p>
             <Button variant="contained" onClick={() => {
-              console.log(text) 
-              dataText = JSON.stringify({"imageURL": dataURL, "output": text})
+              console.log(parsed) 
+              dataText = {"imageURL": dataURL, "output": parsed}
               getPerson(); 
     console.log(getPerson()); 
-  }}>Submit</Button>
+  }}>Complete</Button>   
+
+
+
+
 
                 </CardContent>
               </Card>
@@ -194,4 +246,4 @@ OCR Progress:                </Typography>
 
   )
 
-};
+}

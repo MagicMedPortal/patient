@@ -186,7 +186,7 @@ export default function PatientIntake() {
             <p></p>
 
             <Button variant="contained" onClick={() => {
-    dataSet = JSON.stringify({'feel': feelValue, 'pain': painValue, 'symptoms': body})
+    dataSet = {"feel": feelValue, "pain": painValue, "symptoms": body}
     getBodyDataSet(); 
     console.log(getBodyDataSet()); 
   }}>Submit</Button>

@@ -35,7 +35,7 @@ function SimpleDialog(props) {
     onClose(selectedValue);
   };
 
-  let dataSet = JSON.stringify({"time": Date.now(), "body": getBodyDataSet(), "vitals": getVitals, "person": getPerson()}) 
+  let dataSet = {"time": Date.now(), "body": getBodyDataSet(), "vitals": getVitals, "person": getPerson()}
   console.log(dataSet); 
 
   
@@ -49,7 +49,7 @@ function SimpleDialog(props) {
       <Typography variant='body1'>Due to the technical constraints of this demo, there isn't an actual function to submit to a database. However, this is where data will be passed to the database of choice. Below is what the passover would look like: 
       <p>
         
-        <code>
+        <code style={{whiteSpace: "pre-wrap"}}>
 
           {dataSet}
 
