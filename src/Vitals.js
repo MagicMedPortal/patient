@@ -2,7 +2,7 @@ let vitals;
 
 export function getVitals(){
 
-    vitals = {"temp": 100, "heartrate": 100}
+    vitals = JSON.stringify({"temp": 100, "heartrate": 100})
 
     return(vitals)
 

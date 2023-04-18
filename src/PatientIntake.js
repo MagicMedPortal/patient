@@ -86,7 +86,7 @@ IconContainer.propTypes = {
 
 
 export function getBodyDataSet() {
-  return (dataSet)
+  return (JSON.stringify(dataSet))
 }
 
 

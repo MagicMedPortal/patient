@@ -35,7 +35,7 @@ const openai = new OpenAIApi(config)
 
 export function getPerson() {
 
-  return (dataText)
+  return (JSON.stringify(dataText))
 }
 
 function LinearProgressWithLabel(props) {
@@ -237,7 +237,7 @@ OCR Progress:                </Typography>
               dataText = {"imageURL": dataURL, "output": parsed}
               getPerson(); 
     console.log(getPerson()); 
-  }}>Complete</Button>   
+  }}>Complete</Button>  
 
 
 

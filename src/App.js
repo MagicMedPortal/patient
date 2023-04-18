@@ -35,7 +35,7 @@ function SimpleDialog(props) {
     onClose(selectedValue);
   };
 
-  let dataSet = {"time": Date.now(), "body": getBodyDataSet(), "vitals": getVitals, "person": getPerson()}
+  let dataSet = JSON.stringify({"time": Date.now(), "body": getBodyDataSet(), "vitals": getVitals, "person": getPerson()})
   console.log(dataSet); 
 
   
@@ -51,7 +51,7 @@ function SimpleDialog(props) {
         
         <code style={{whiteSpace: "pre-wrap"}}>
 
-          {dataSet.toString()}
+          {dataSet}
 
 
         </code>
