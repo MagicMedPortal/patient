@@ -156,7 +156,7 @@ let image = Insurance;
   
       const {data : {choices} } = await openai.createCompletion({
         model: 'text-davinci-002',
-        prompt: `can you please transform this string ${text} into a JSON object, removing all unncessary characters, and output the JSON`,
+        prompt: `can you please transform this string ${text} into JSON, removing all unncessary characters, and output the JSON`,
         max_tokens: 300,
         n: 1,
         temperature: 0.5,
