@@ -150,6 +150,9 @@ let image = Insurance;
 
         console.log("Running Chat GPT")
 
+        const config = new Configuration({apiKey: process.env.REACT_APP_APIKEY})
+        const openai = new OpenAIApi(config)
+
   
       const {data : {choices} } = await openai.createCompletion({
         model: 'text-davinci-002',
