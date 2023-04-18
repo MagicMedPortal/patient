@@ -28,8 +28,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 
 let dataText; 
-const config = new Configuration({apiKey: process.env.REACT_APP_CHATKEY})
-const openai = new OpenAIApi(config)
+
 
 
 export function getPerson() {
