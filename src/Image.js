@@ -146,9 +146,6 @@ let image = Insurance;
         console.log(`this is what ${text} looks like`)
         console.log(typeof text)
         await worker.terminate();
-      })();
-
-      (async()=>{
 
         console.log("Running Chat GPT")
 
@@ -157,7 +154,7 @@ let image = Insurance;
   
       const {data : {choices} } = await openai.createCompletion({
         model: 'text-davinci-002',
-        prompt: `can you please transform this string ${text} into JSON, removing all unncessary characters, and output the JSON`,
+        prompt: `can you please transform this text ${text} into the corresponding JSON. Please do so by removing all unncessary characters, and output the JSON`,
         max_tokens: 300,
         n: 1,
         temperature: 0.5,
@@ -165,7 +162,6 @@ let image = Insurance;
 
       console.log(choices[0].text)
       setParsed(choices[0].text)
-
 
       })();
     }
@@ -205,25 +201,26 @@ OCR Progress:                </Typography>
 
       <TextField
           id="ocr-output"
-          label="OCR + ChatGPT Parsed"
-          defaultValue={parsed}
-          onChange={event=> setParsed(event.target.value)}
+          label="OCR Output"
+          defaultValue={text}
+          onChange={event=> setText(event.target.value)}
           multiline
           fullWidth
           helperText= "This is after chatGPT has cleaned it up."
+          style={{whiteSpace: "pre-wrap"}}
         />
 
         <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
-          id="ocr output"
+          id="chat-gpt"
         >
-          <Typography>Raw OCR Output</Typography>
+          <Typography>ChatGPT Output</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography variant="body2" style={{whiteSpace: "pre-wrap"}}>
-            {text}
+            {parsed}
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -233,11 +230,20 @@ OCR Progress:                </Typography>
 
         <p></p>
             <Button variant="contained" onClick={() => {
+              console.log(text) 
+              dataText = {"imageURL": dataURL, "output": text}
+              getPerson(); 
+    console.log(getPerson()); 
+  }}>Complete with OCR</Button> 
+  
+   &nbsp; &nbsp; &nbsp;             
+  
+  <Button variant="contained" onClick={() => {
               console.log(parsed) 
               dataText = {"imageURL": dataURL, "output": parsed}
               getPerson(); 
     console.log(getPerson()); 
-  }}>Complete</Button>  
+  }}>Complete with ChatGPT</Button>  
 
 
 
