@@ -38,6 +38,7 @@ export function getPerson() {
   return (JSON.stringify(dataText))
 }
 
+// this is  for the progress bar! 
 function LinearProgressWithLabel(props) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -63,19 +64,13 @@ LinearProgressWithLabel.propTypes = {
 
 
 
-
-
-
-
-
-
 export default function Image() {
 
 //let image = getImageSnap(); 
 
-let image = Insurance; 
+let image = getImageSnap(); // get image from the patient in take  
 
-  let img; 
+  let img; // this is for the p5 processing 
 
   const [text, setText] = useState("");
   const [progress, setProgress] = useState(0)
@@ -101,10 +96,12 @@ let image = Insurance;
     p5.setup = () => {
     p5.createCanvas(img.width, img.height).id("canvasId");
     const canvas = document.getElementById("canvasId");
-    p5.image(img, 0, 0); 
+    p5.image(img, 0, 0);  
+
+    //  for image processing p5.filter(p5.THRESHOLD) --- please refer to the the threshold.js 
 
   
-  // make quadrants
+  // make quadrants this will be easier for the OCR to parse data 
       
       const rectangles = [
         {
@@ -124,6 +121,9 @@ let image = Insurance;
 
     ];
 
+    // this will initiate it 
+    // for logic you can set a confidence level by setting m.confidence 
+    // this is taken from the documentation 
     (async () => {
         const worker = await createWorker({
           logger: m => setProgress(m.progress*100)
@@ -140,9 +140,9 @@ let image = Insurance;
 
         for (let i = 0; i < rectangles.length; i++) {
           const { data: { text } } = await worker.recognize(canvas, { rectangle: rectangles[i] });
-          values.push(text.replace(/(\n+)/g, "\n").replace(/(1\n|,\n|  |,)/g, ""));
+          values.push(text.replace(/(\n+)/g, "\n").replace(/(1\n|,\n|  |,)/g, "")); //clean up text to remove weird linebreaks 
         }
-        setText(values[0].concat(values[1])); 
+        setText(values[0].concat(values[1]));  // this is to clean out the junk text 
         console.log(`this is what ${text} looks like`)
         console.log(typeof text)
         await worker.terminate();
@@ -151,13 +151,13 @@ let image = Insurance;
 
 
 
-  
+  // chat gpt to start parsing this data 
       const {data : {choices} } = await openai.createCompletion({
         model: 'text-davinci-002',
-        prompt: `can you please transform this text ${text} into the corresponding JSON. Please do so by removing all unncessary characters, and output the JSON`,
-        max_tokens: 300,
+        prompt: `can you please identify the key value pairs in this text: ${text} \n then turn it into the corresponding JSON. Please do so by removing all unncessary characters, and output the JSON`,
+        max_tokens: 500,
         n: 1,
-        temperature: 0.5,
+        temperature: 0.3,
       });
 
       console.log(choices[0].text)
@@ -216,12 +216,12 @@ OCR Progress:                </Typography>
           aria-controls="panel1a-content"
           id="chat-gpt"
         >
-          <Typography>ChatGPT Output</Typography>
+          <Typography>ChatGPT Output NOT LINKED DUE TO API KEY</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography variant="body2" style={{whiteSpace: "pre-wrap"}}>
-            {parsed}
-          </Typography>
+            
+            Check code out for how to implement with your OWN api key          </Typography>
         </AccordionDetails>
       </Accordion>
       

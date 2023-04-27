@@ -26,6 +26,9 @@ const StyledRating = styled(Rating)(({ theme }) => ({
 }));
 
 
+// these icons are from the MUI guide 
+// this is for human-computer interaction 
+
 
 
 const customIcons = {

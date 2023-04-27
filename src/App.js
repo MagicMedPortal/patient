@@ -28,6 +28,7 @@ import CardContent from '@mui/material/CardContent';
 
 // layout credits to MUI base example: https://mui.com/material-ui/react-stepper/
 
+// Sample Dialog, taken form the MUI documentation takes care of the submission of the data. 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
 
@@ -69,32 +70,35 @@ SimpleDialog.propTypes = {
 
 
 
+// steps define what components are being pulled into the main screen.  This is to make App.js less cluttered. 
 const steps = [
   {
     label: 'Welcome',
-    description: <Welcome/> 
+    description: <Welcome/>  // landing page 
   },
   {
     label: 'What Brings You In',
     description:
-      <PatientIntake />,
+      <PatientIntake />, // Patient check in 
   },
   {
     label: 'Basic Vitals',
-    description: <Vitals/>,
+    description: <Vitals/>, //maybe remove? 
   },
   {
     label: 'Get Insurance Information',
-    description: <PatientInfo/>,
+    description: <PatientInfo/>, // get image from camera
   },
 
     {
     label: 'Confirm Checkin',
-    description: <Image/>,
+    description: <Image/>, //this is the heart of the application the OCR and the OpenAi 
   }
 ];
 
-export default function VerticalLinearStepper() {
+// actual app 
+
+export default function App() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -123,10 +127,9 @@ export default function VerticalLinearStepper() {
     handleReset(); 
   };
 
-  //return (
-   //<Image /> 
-  //);
 
+
+  
     return (
     <Container maxWidth="sm">
       <div style={{padding: 10}}>&nbsp;</div>
