@@ -216,12 +216,12 @@ OCR Progress:                </Typography>
           aria-controls="panel1a-content"
           id="chat-gpt"
         >
-          <Typography>ChatGPT Output NOT LINKED DUE TO API KEY</Typography>
+          <Typography>Chat GPT Output</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography variant="body2" style={{whiteSpace: "pre-wrap"}}>
             
-            Check code out for how to implement with your OWN api key          </Typography>
+            {parsed}</Typography>
         </AccordionDetails>
       </Accordion>
       
