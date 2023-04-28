@@ -23,7 +23,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 // progress code is from Material UI  https://mui.com/material-ui/react-progress/#LinearDeterminate.js 
-// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js & https://github.com/Gherciu/react-p5
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js- specifically this guy: https://stackoverflow.com/a/71369517 
 
 
 
@@ -97,6 +97,10 @@ let image = getImageSnap(); // get image from the patient in take
     p5.createCanvas(img.width, img.height).id("canvasId");
     const canvas = document.getElementById("canvasId");
     p5.image(img, 0, 0);  
+    
+    // img.filter(p5.GRAY)
+    //p5.image(img, 0, 0)
+    
 
     //  for image processing p5.filter(p5.THRESHOLD) --- please refer to the the threshold.js 
 
