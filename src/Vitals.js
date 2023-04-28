@@ -55,6 +55,7 @@ export default function Vitals() {
           }
           // value is a string will be streaming here.
           console.log(value);
+          setVitals(value); 
         }
 
       }
@@ -84,7 +85,7 @@ export default function Vitals() {
 
 
 
-  return(<div>{value}<p><Button id="start" onClick={handleClick} variant="contained">Start Gathering Vitals</Button></p>
+  return(<div>{vitals}<p><Button id="start" onClick={handleClick} variant="contained">Start Gathering Vitals</Button></p>
   <Button id="done" variant="outlined" onClick={handleClose}>Submit Vitals</Button></div>)
 
 
