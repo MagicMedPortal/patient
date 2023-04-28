@@ -8,7 +8,7 @@ import {  useEffect, useRef } from "react";
 
 
 // source for taking picture https://editor.p5js.org/son/sketches/LuJ2eGf9p
-// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js (specifically: https://stackoverflow.com/a/71369517) 
 // example for upscaler: 
 
 
