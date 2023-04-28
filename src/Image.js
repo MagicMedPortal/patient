@@ -23,7 +23,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 // progress code is from Material UI  https://mui.com/material-ui/react-progress/#LinearDeterminate.js 
-// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js & https://github.com/Gherciu/react-p5
+// source for using P5 in react https://stackoverflow.com/questions/54868777/how-to-use-react-with-p5-js- specifically this guy: https://stackoverflow.com/a/71369517 
 
 
 
