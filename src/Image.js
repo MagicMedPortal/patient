@@ -154,7 +154,7 @@ let image = getImageSnap(); // get image from the patient in take
   // chat gpt to start parsing this data 
       const {data : {choices} } = await openai.createCompletion({
         model: 'text-davinci-002',
-        prompt: `can you please identify the key value pairs in this text: ${text} \n then turn it into the corresponding JSON. Please do so by removing all unncessary characters, and output the JSON`,
+        prompt: `transform this block of text to JSON: \n ${text}`,
         max_tokens: 500,
         n: 1,
         temperature: 0.3,
