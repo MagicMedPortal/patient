@@ -97,6 +97,10 @@ let image = getImageSnap(); // get image from the patient in take
     p5.createCanvas(img.width, img.height).id("canvasId");
     const canvas = document.getElementById("canvasId");
     p5.image(img, 0, 0);  
+    
+    // img.filter(p5.GRAY)
+    //p5.image(img, 0, 0)
+    
 
     //  for image processing p5.filter(p5.THRESHOLD) --- please refer to the the threshold.js 
 
